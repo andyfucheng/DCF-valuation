@@ -11,10 +11,20 @@ Before starting the analysis, please be sure to read the legal disclaimer of yaf
 <br/>To estimate target's future cash flow, we need the historical data for company's total revenue, net income, total cash from operating activities, capital expenditures, cash and long term debt level. All the data above can be obtained through yfinance. 
 
 ## P/E ratio 
+Before entering the DCF valuation model, I want to introduce a basic but powerful and common valuation indicators named P/E ratio. This method simply divide the stock price with the company's earnings per share given a specific period like the past 1 year. P/E ratio can also be interpreted as the money investors will pay per share for $1 of earnings. Two types of P/E ratios, forward and trailing P/E , are commonly used in practice.
 ### Forward P/E ratio 
-
+The forward P/E ratio makes use of the company's futre earnings guidance rather historical figures. To 
+```
+def forward_pe(symbol):
+    ticker = yf.Ticker(symbol)
+    todays_data = ticker.history(period='1d')
+    current_closing_price = todays_data['Close'][0]
+    forward_eps = ticker.info.get('forwardEps')
+    forward_pe = current_closing_price/forward_eps
+    return forward_pe
+```
 ### Trailing P/E ratio
-
+The trailing P/E depends on past perfomance by dividing the current share price by the aggregated EPS earned over the past 12 months. 
 ## Start model building 
 
 
