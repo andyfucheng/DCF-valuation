@@ -13,7 +13,7 @@ Before starting the analysis, please be sure to read the legal disclaimer of yaf
 ## P/E ratio 
 Before entering the DCF valuation model, I want to introduce a basic but powerful and common valuation indicators named P/E ratio. This method simply divide the stock price with the company's earnings per share given a specific period like the past 1 year. P/E ratio can also be interpreted as the money investors will pay per share for $1 of earnings. Two types of P/E ratios, forward and trailing P/E , are commonly used in practice.
 ### Forward P/E ratio 
-The forward P/E ratio makes use of the company's futre earnings guidance rather historical figures. To 
+The forward P/E ratio makes use of the company's futre earnings guidance rather historical figures. Using yfinance library in python, we can easily obtain the trailing P/E ratio by running following code.
 ```
 def forward_pe(symbol):
     ticker = yf.Ticker(symbol)
@@ -24,7 +24,13 @@ def forward_pe(symbol):
     return forward_pe
 ```
 ### Trailing P/E ratio
-The trailing P/E depends on past perfomance by dividing the current share price by the aggregated EPS earned over the past 12 months. 
+The trailing P/E depends on past perfomance by dividing the current share price by the aggregated EPS earned over the past 12 months. The company's trailing P/E ratio is stored in the info function in yfinance. To get the figure, we can run the code below.
+```
+def trailing_pe(symbol):
+    ticker = yf.Ticker(symbol)
+    trailing_pe = ticker.info.get('trailingPE')
+    return trailing_pe
+```
 ## Start model building 
 
 
