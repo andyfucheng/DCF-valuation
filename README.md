@@ -62,14 +62,11 @@ expectedfcf = pd.Series()
 expectedfcf = [profit*avgfcf2profitmargin for profit in expectedprofit]
 ```
 Since our future profit margin and free cash flow estimation are mainly based on the historical performance, this model is desigated for mature firm with stable revenue growth and cash flows.
-After calculating the expected future cash flows for next five years, we then set a terminal value to our target company which represents the value of a business beyond the forecasted period. We apply the Gordon growth model to get our terminal value. The formula is $GGM = D(1+g)/k_e-g$ which in our case, D will be the expected cash flow at year 5, g is the perpectual growth rate, usually between 2% to 3%. $k_e$ is the cost of capital (WACC).
+After calculating the expected future cash flows for next five years, we then set a terminal value to our target company which represents the value of a business beyond the forecasted period. We apply the Gordon growth model to get our terminal value. The formula is $GGM = D(1+g)/k_e-g$ which in our case, $D$ will be the expected cash flow at year 5, $g$ is the perpectual growth rate, usually between 2% to 3%. $k_e$ is the cost of capital (WACC).
 ```
 terminalvalue = expectedfcf[-1]*(1+perpetualgrowth)/(wacc-perpetualgrowth)
 ```
-Another important parameter in the DCF model is the discount rate. Here in this project, weighted average cost of capital (WACC) is used as our discount rate to covnert the estimated future cash flow and terminal value to the present value at this point. WACC represents the amount of compensation the market (both bonds and equities buyers) are willing to get paid in returns of putting capital to the firm.
--- discount the future value to the present value 
--- last but not the least, unlevered the value by deducting firms' long term debt and add back the holding cash.
--- the fair value based on our DCF equals to the calculated equity value divided by total outstanding share.
+Another important parameter in the DCF model is the discount rate. Here in this project, weighted average cost of capital (WACC) is used as our discount rate to covnert the estimated future cash flow and terminal value to the present value at this point. WACC represents the amount of compensation the market (both bonds and equities buyers) are willing to get paid in returns of putting capital to the firm. We then use WACC to discount expected future cash flows (included terminal value) to obtain the current value. Last but not the least, unlevered the value by deducting firms' long term debt and adding back the holding cash. The fair value of our target based on DCF model equals to the calculated equity value divided by total outstanding share.
 ```
 todayvalue = pd.Series()
 for n in range(0,4):
