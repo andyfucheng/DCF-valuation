@@ -63,12 +63,17 @@ ticker = yf.Ticker(symbol)
     expectedfcf = [profit*avgfcf2profitmargin for profit in expectedprofit]
 ```
 Since our future profit margin and free cash flow estimation are mainly based on the historical performance, this model is desigated for mature firm with stable revenue growth and cash flows.
+-- calculate the the terminal value using golden gordon's rule
 
 Another important parameter in the DCF model is the discount rate. Here in this project, weighted average cost of capital (WACC) is used as our discount rate to covnert the estimated future cash flow and terminal value to the present value at this point. WACC represents the amount of compensation the market (both bonds and equities buyers) are willing to get paid in returns of putting capital to the firm.
+-- discount the future value to the present value 
+-- last but not the least, unlevered the value by deducting firms' long term debt and add back the holding cash.
+-- the fair value based on our DCF equals to the calculated equity value divided by total outstanding share.
 
 ## Example
 "AAPL"
 
+There is another similar function named *fcf_valuation_adjusted()*, which gives you option to adjust the figure of profit margin and free cash flow-to-profit margin to your reasonable figures.
 ## Model limitation and disclaimer
 This project aims to show the logic behind DCF model and to actually practice it. Again, the calculation does not guaranteee 
 figures accuracy and should not be used as the support for any investment and business decisions.
